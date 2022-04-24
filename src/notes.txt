@@ -1,0 +1,19 @@
+API : application programming interface
+----
+
+client == req == API ==> server ==> DB
+      res<======    =========
+         response time 
+
+fetch (js)
+axios (library) used to send http requests (POST PUT GET DELETE)
+
+.then .catch
+async/await (es7)
+----
+
+synchronus code == blocking code
+
+asynchronus code == non blocking code 
+
+JSON : javascript object notation : data format used in web data exchange

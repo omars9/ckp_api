@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { key } from "./config";
 
 function App() {
+  const [images, setImages] = useState([]);
+  const [search, setSearch] = useState("");
+  // immitate componentDidMount
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `https://pixabay.com/api/?key=${key}&q=${search}&image_type=photo`
+      );
+      console.log(res.data.hits);
+      setImages(res.data.hits);
+    };
+
+    fetchData();
+  }, [search]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      {images.map((el) => (
+        <div>
+          <img height={500} width={600} src={el.largeImageURL} alt="" />
+        </div>
+      ))}
     </div>
   );
 }
